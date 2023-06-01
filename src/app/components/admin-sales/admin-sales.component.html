@@ -1,0 +1,62 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/ventas.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Ventas</h1>
+                <div class="text-center">
+                    <p class="title">Aquí encontrarás las ventas</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section-team text-center">
+        <div class="container">
+            <h2 class="title">Historial</h2>
+            <div class="team">
+                <!--<div class="row mb-5">
+                    <div class="col-md-4">
+                        <label>Usuario</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary btn-round">Buscar <i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>-->
+                <div class="row" style="overflow: auto">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Comprobante</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let sale of salesLS; index as i">
+                            <td class="centerCell">{{ sale.usuario }}</td>
+                            <td class="centerCell">{{ sale.estado}}</td>
+                            <td class="centerCell">{{ sale.fecha | date:'short'}}</td>
+                            <td class="centerCell">
+                                <a type="button" class="btn btn-primary btn-round" (click)="viewpdf(sale.comprobanteDePago)">
+                                    Ver comprobante <i class="fa fa-money" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a type="button" class="btn btn-primary btn-round" (click)="manageSale(sale)" >
+                                    Gestionar <i class="fa fa-rocket" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

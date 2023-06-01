@@ -1,0 +1,64 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/biblioteca.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Biblioteca</h1>
+                <div class="text-center">
+                    <p class="title">Aquí encontrarás todo lo que has comprado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section-team text-center">
+        <div class="container">
+            <h2 class="title">Tu biblioteca</h2>
+            <div class="team">
+                <div class="row" *ngIf="ownedLoopsLs.length > 0">
+                    <div class="col-md-12">
+                        <h4 class="row title">Loops</h4>
+                    </div>
+                    <div class="col-md-4 mb-4" *ngFor="let loop of ownedLoopsLs">
+                        <div class="img-raised" style="border-radius: 13px;">
+                            <img [src]="loop.cover" alt="Imagen en miniatura" class="img-fluid imgScuared mt-5" style="border-radius: 13px;">
+                            <h4 class="title mr-2 ml-2" style="overflow-wrap: break-word;">{{loop.nombre}}</h4>
+                            <p class="category text-primary ml-2 mr-2" style="overflow-wrap: break-word;">{{loop.autor.nombre}}</p>
+                            <p class="description ml-2 mr-2" style="overflow-wrap: break-word;">{{loop.descripcion}}</p>
+                            <span class="badge badge-info">{{loop.instrumento}}</span>
+                            <p class="category text-primary ml-2 mr-2" style="overflow-wrap: break-word;">$ {{loop.precio}}</p>
+                            <a *ngIf="audioReproductor.src != loop.audioPreview" class="btn btn-primary btn-icon btn-round" (click)="reproducir(loop.audioPreview, true)"><i class="now-ui-icons media-1_button-play"></i></a>
+                            <a *ngIf="audioReproductor.src == loop.audioPreview" class="btn btn-primary btn-icon btn-round" (click)="reproducir(loop.audioPreview, false)"><i class="now-ui-icons media-1_button-pause"></i></a>
+                            <a class="btn btn-primary btn-icon btn-round" href="{{download(loop.audioVenta)}}"><i class="now-ui-icons arrows-1_cloud-download-93"></i></a>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="ownedLibsLs.length > 0">
+                    <div class="col-md-12">
+                        <h4 class="row title">Librerías</h4>
+                    </div>
+                    <div class="col-md-4 mb-4" *ngFor="let lib of ownedLibsLs">
+                        <div class="team-player img-raised" style="border-radius: 13px;">
+                            <img [src]="lib.cover" alt="Imagen en miniatura" class="img-fluid imgScuared mt-5" style="border-radius: 13px;">
+                            <h4 class="title mr-2 ml-2" style="overflow-wrap: break-word;">{{lib.nombre}}</h4>
+                            <p class="category text-primary ml-2 mr-2" style="overflow-wrap: break-word;">{{lib.autor.nombre}}</p>
+                            <p class="description ml-2 mr-2" style="overflow-wrap: break-word;">{{lib.descripcion}}</p>
+                            <span class="badge badge-info">{{lib.cantidadLoops}} Loops</span>
+                            <p class="category text-primary ml-2 mr-2" style="overflow-wrap: break-word;">$ {{lib.precio}}</p>
+                            <a *ngIf="audioReproductor.src != lib.audioPreview" class="btn btn-primary btn-icon btn-round" (click)="reproducir(lib.audioPreview, true)"><i class="now-ui-icons media-1_button-play"></i></a>
+                            <a *ngIf="audioReproductor.src == lib.audioPreview" class="btn btn-primary btn-icon btn-round" (click)="reproducir(lib.audioPreview, false)"><i class="now-ui-icons media-1_button-pause"></i></a>
+                            <a class="btn btn-primary btn-icon btn-round" href="{{download(lib.audioVenta)}}"><i class="now-ui-icons arrows-1_cloud-download-93"></i></a>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="ownedLoopsLs.length == 0">
+                    <div class="col-12 text_align-center">
+                        <p class="category text-info">No se encontraron loops</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

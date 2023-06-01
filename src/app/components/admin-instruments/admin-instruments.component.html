@@ -1,0 +1,53 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/instrumentos.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Administrar instrumentos</h1>
+                <div class="text-center">
+                    <p class="title">Aquí podrás administrar los instrumentos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section-team text-center">
+        <div class="container">
+            <h2 class="title">¿Deseas agregar un nuevo instrumento?</h2>
+            <div class="team">
+                <div class="row mb-5 justify-content-center">
+                    <div class="col-sm-6 col-lg-6">
+                        <div class="form-group">
+                            <input type="text" placeholder="Nombre del instrumento" class="form-control" [(ngModel)]="instrumentName" (keydown.enter)="addInstrument()" />
+                            <button type="button" class="btn btn-primary btn-round btn-block" (click)="addInstrument()">Agregar instrumento <i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <p>
+                        Aquí encontrarás los instrumentos que has agregado hasta el momento
+                    </p>
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let instrument of instrumentsLs; index as i">
+                            <td>{{instrument.nombre}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-icon btn-round" type="button" (click)="deleteInstrument(instrument)">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

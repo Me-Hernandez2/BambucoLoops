@@ -1,0 +1,42 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/libreria2.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Librerías</h1>
+                <div class="text-center">
+                    <p class="title">Aquí encontrarás todo lo que tenemos para ofrecerte</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section-team text-center">
+        <div class="container">
+            <h2 class="title">Librerías en stock</h2>
+            <div class="team">
+                <div class="row" *ngIf="libsLs.length > 0">
+                    <div class="col-md-4 mb-4" *ngFor="let lib of libsLs">
+                        <div class="img-raised" style="border-radius: 13px;">
+                            <img [src]="lib.cover" alt="Imagen de portada" class="img-fluid imgScuared mt-5" style="border-radius: 13px;">
+                            <h4 class="title mr-2 ml-2" style="overflow-wrap: break-word;">{{lib.nombre}}</h4>
+                            <p class="category text-primary ml-2 mr-2" style="overflow-wrap: break-word;">{{lib.autor.nombre}}</p>
+                            <p class="description ml-2 mr-2" style="overflow-wrap: break-word;">{{lib.descripcion}}</p>
+                            <span class="badge badge-info">{{lib.cantidadLoops}} loops</span>
+                            <p class="category text-primary ml-2 mr-2" style="overflow-wrap: break-word;">${{lib.precio}}</p>
+                            <a *ngIf="audioReproductor.src != lib.audioPreview" class="btn btn-primary btn-icon btn-round" (click)="reproducir(lib.audioPreview, true)"><i class="now-ui-icons media-1_button-play"></i></a>
+                            <a *ngIf="audioReproductor.src == lib.audioPreview" class="btn btn-primary btn-icon btn-round" (click)="reproducir(lib.audioPreview, false)"><i class="now-ui-icons media-1_button-pause"></i></a>
+                            <br>
+                            <a type="button" class="btn btn-primary btn-round" (click)="buyProduct(lib)">Comprar <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="libsLs.length == 0">
+                    <div class="col-12 text_align-center">
+                        <p *ngIf="instrumentSelected == undefined" class="category text-info">No se encontraron librerías</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

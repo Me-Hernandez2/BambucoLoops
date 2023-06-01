@@ -1,0 +1,65 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/autor.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Administrar autores</h1>
+                <div class="text-center">
+                    <p class="title">Aquí podras administrar a los autores</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section-team text-center">
+        <div class="container">
+            <h2 class="title">Registrar autor</h2>
+            <div class="team">
+                <div class="row mb-5">
+                    <div class="col-md-8" [formGroup]="formAuthor">
+                        <div class="row mb-5">
+                            <div class="col-sm-6 col-lg-6">
+                                <label>Nombre completo del autor</label>
+                                <input type="text" class="form-control" formControlName="nombre"/>
+                            </div>
+                            <div class="col-sm-6 col-lg-6">
+                                <label>Número de documento</label>
+                                <input type="text" class="form-control" formControlName="numeroDocumento"/>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary btn-round" (click)="addAuthor()">Registrar <i class="now-ui-icons files_paper"></i></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Número de documento</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let author of authorsLs; index as i">
+                            <td class="centerCell">{{ author.nombre }}</td>
+                            <td class="centerCell">{{ author.numeroDocumento}}</td>
+                            <td>
+                                <a type="button" class="btn btn-primary btn-round" >
+                                    Eliminar <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

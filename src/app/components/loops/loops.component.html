@@ -1,0 +1,58 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/loops.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Loops</h1>
+                <div class="text-center">
+                    <p class="title">Aquí encontrarás todo lo que tenemos para ofrecerte</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section-team text-center">
+        <div class="container">
+            <h2 class="title">¿Qué estás buscando?</h2>
+            <div class="team">
+                <div class="row mb-5">
+                    <div class="col-md-4">
+                        <div ngbDropdown class="d-inline-block">
+                            <button type="button" class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>
+                                {{instrumentSelected?.nombre || 'Instrumento'}}
+                            </button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                <button *ngFor="let instrument of instrumentsLs" ngbDropdownItem (click)="changeInstrument(instrument)">{{instrument.nombre}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary btn-round">Buscar <i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div class="row" *ngIf="loopsLs.length > 0">
+                    <div class="col-md-4 mb-4" *ngFor="let loop of loopsLs">
+                        <div class="img-raised" style="border-radius: 13px;">
+                            <img [src]="loop.cover" alt="Imagen de portada" class="img-fluid imgScuared mt-5" style="border-radius: 13px;">
+                            <h4 class="title mr-2 ml-2" style="overflow-wrap: break-word;">{{loop.nombre}}</h4>
+                            <p class="category text-primary ml-2 mr-2" style="overflow-wrap: break-word;">{{loop.autor.nombre}}</p>
+                            <p class="description ml-2 mr-2" style="overflow-wrap: break-word;">{{loop.descripcion}}</p>
+                            <span class="badge badge-info">{{loop.instrumento}}</span>
+                            <p class="category text-primary ml-2 mr-2" style="overflow-wrap: break-word;">${{loop.precio}}</p>
+                            <a *ngIf="audioReproductor.src != loop.audioPreview" class="btn btn-primary btn-icon btn-round" (click)="reproducir(loop.audioPreview, true)"><i class="now-ui-icons media-1_button-play"></i></a>
+                            <a *ngIf="audioReproductor.src == loop.audioPreview" class="btn btn-primary btn-icon btn-round" (click)="reproducir(loop.audioPreview, false)"><i class="now-ui-icons media-1_button-pause"></i></a>
+                            <br>
+                            <a type="button" class="btn btn-primary btn-round" (click)="buyProduct(loop)">Comprar <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="loopsLs.length == 0">
+                    <div class="col-12 text_align-center">
+                        <p *ngIf="!!instrumentSelected" class="category text-info">¡Oops! Al parecer no hay loops de <span class="category text-primary">{{instrumentSelected?.nombre}}</span></p>
+                        <p *ngIf="instrumentSelected == undefined" class="category text-info">No se encontraron loops</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

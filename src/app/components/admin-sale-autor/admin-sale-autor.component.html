@@ -1,0 +1,129 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/ventas.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Ventas por autor</h1>
+                <div class="text-center">
+                    <p class="title">Aquí encontrarás las ventas que ha realizado cada autor</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section-team text-center">
+        <div class="container">
+            <h2 class="title">Ventas hasta el momento del autor</h2>
+            <div class="team">
+                <div class="row mb-5">
+                    <div class="col-md-4">
+                        <label>Número de documento del autor</label>
+                        <input type="text" class="form-control" [(ngModel)]="numeroDocumento"/>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Estado de las ventas</label>
+                        <div ngbDropdown>
+                            <button type="button" class="btn btn-primary btn-simple btn-round btn-block" id="dropdownBasic2" ngbDropdownToggle>
+                                {{stateSelected?.nombre || 'Seleccionar estado'}}
+                            </button><br>
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                <button *ngFor="let state of stateLs" ngbDropdownItem (click)="changesState(state)">{{state.nombre}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary btn-round" (click)="filterSalesAutor()">Generar reporte <i class="now-ui-icons files_single-copy-04" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div #tablaReporte *ngIf="salesAutorLS.length>0">
+                    <div *ngIf="imprimiendo">
+                        <br>
+                        <br>
+                        <div class="col-md-12 text_align-center">
+                            <h1>REPORTE DE VENTAS BAMBUCOLOOPS</h1>
+                        </div>
+                        <br>
+                        <div class="col-md-12" style="display: table">
+                            <p style="float: left"><b>Fecha:</b> {{fechaActual  | date:'short'}}</p>
+                        </div>
+                        <div class="col-md-12" style="display: table">
+                            <p style="float: left"><b>Nombre del autor:</b> {{salesAutorLS[0].autor.nombre}}</p>
+                        </div>
+                        <div class="col-md-12" style="display: table">
+                            <p style="float: left"><b>Número de documento del autor:</b> {{salesAutorLS[0].autor.numeroDocumento}}</p>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="row" style="overflow: auto">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Autor</th>
+                                <th scope="col">Numero documento</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Valor</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let sale of salesAutorLS; index as i">
+                                <td class="centerCell">{{ sale.autor.nombre }}</td>
+                                <td class="centerCell">{{ sale.autor.numeroDocumento }}</td>
+                                <td class="centerCell">{{ sale.estado == true ? 'PENDIENTE DE PAGO' : 'PAGADA'}}</td>
+                                <td class="centerCell">{{ sale.fecha | date:'short'}}</td>
+                                <td class="centerCell">{{ sale.producto.nombreProducto}}</td>
+                                <td class="centerCell">${{ sale.producto.precio}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: end">TOTAL: </td>
+                                <td>${{totalVentas}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: end"> TOTAL COP: </td>
+                                <td>{{totalVentas * 1000 | currency}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: end"> TOTAL COMISION: </td>
+                                <td> {{(totalVentas * 1000 * 0.3)| currency}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td style="text-align: end"> TOTAL GANANCIAS AUTOR: </td>
+                                <td>  {{(totalVentas * 1000 ) - (totalVentas * 1000 * 0.3)| currency}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <a *ngIf="stateSelected.value && salesAutorLS.length>0" type="button" class="btn btn-primary btn-round" (click)="paySales()">
+                    Pagar <i class="now-ui-icons business_money-coins" aria-hidden="true"></i>
+                </a>
+                <a *ngIf="!stateSelected.value && salesAutorLS.length>0" type="button" class="btn btn-primary btn-round" (click)="imprimirElemento()">
+                    Imprimir reporte <i class="now-ui-icons files_paper" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

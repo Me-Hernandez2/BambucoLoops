@@ -1,0 +1,69 @@
+<div class="wrapper">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/recargar2.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Recargar BambuCoins</h1>
+            </div>
+        </div>
+    </div>
+    <div class="section section-about-us">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h2 class="title">Como recargar</h2>
+                    <h5>
+                        Estas son las instrucciones para recargar BambuCoins a su cuenta de Bambucoloops:
+                    </h5>
+                </div>
+            </div>
+            <div class="separator separator-primary"></div>
+            <div class="section-story-overview">
+                <ol  start="1">
+                    <li><p>Para recargar BambuCoins a tu cuenta de Bambucoloops, primero debes realizar una consignación en una cuenta bancaria de Bancolombia por el valor que deseas recargar. <span style="color: #f96332">Recuerda que 1 BambuCoin equivale a 1.000 pesos colombianos</span>.</p></li>
+                    <li>
+                        <p>La cuenta bancaria en la que debes consignar la encuentras escaneando el siguiente <span style="color: #f96332">código QR</span>:</p><div style="text-align: center;">
+                        <img src="assets/img/qr.jpg" width="200px" height="200px">
+                    </div>
+                    </li>
+                    <li><p>Al realizar la consignación, debes incluir tu número de identificación (Cédula de ciudadanía o NIT) y tu nombre completo en el campo "Referencia" o "Concepto" de la transacción. Esto nos permitirá identificar la transacción y acreditar los BambuCoins correspondientes a tu cuenta de Bambucoloops.</p></li>
+                    <li><p>Una vez realizada la consignación, adjunta en la sección que se encuentra al final de esta página el comprobante de la transacción.</p></li>
+                    <li><p>El equipo de Bambucoloops revisará el comprobante de la transacción y acreditará los BambuCoins correspondientes a tu cuenta en un plazo máximo de <span style="color: #f96332">24 horas hábiles</span>.</p></li>
+                </ol>
+                <p><span style="color: #f96332"><b>¡Listo!</b></span> Con estos pasos ya sabes cómo recargar BambuCoins a tu cuenta de Bambucoloops. Recuerda que si tienes alguna duda o necesitas ayuda adicional, puedes ponerte en contacto con nuestro equipo de soporte al cliente en cualquier momento.
+                </p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="image-container image-left" style="background-image: url('assets/img/inicio1.jpg')">
+                            <!-- First image on the left side -->
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <!-- First image on the right side, above the article -->
+                        <div class="image-container image-right"
+                             style="background-image: url('assets/img/inicio2.jpg')"></div>
+                        <h2>Adjunta aquí tu comprobante de pago</h2>
+                        <input type="file" class="file-input" accept="application/pdf"
+                               (change)="handlePdfInput($event.target.files)" #fileUpload>
+                        <div class="file-upload">
+
+                            {{pdfName || "Aun no ha seleccionado un comprobante de pago."}}
+
+                            <button class="btn btn-info btn-round" style="background-color: #f96332"
+                                    (click)="fileUpload.click()">
+                                <i class="now-ui-icons education_paper" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-lg-4">
+
+            </div>
+        </div>
+    </div>
+</div>
+

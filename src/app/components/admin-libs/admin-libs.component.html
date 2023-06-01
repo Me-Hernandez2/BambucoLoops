@@ -1,0 +1,127 @@
+<div class="wrapper" xmlns="http://www.w3.org/1999/html">
+    <div class="page-header page-header-small">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8" style="background-image: url('assets/img/libreria2.jpg');">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h1 class="title">Administrar librerías</h1>
+                <div class="text-center">
+                    <p class="title">Aquí podrás administrar las librerías</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section section-team text-center">
+        <div class="container">
+            <h2 class="title">Deseas agregar una nueva librería?</h2>
+            <div class="row mb-5">
+                <div class="col-12 mb-5 justify-content-center">
+                    <div class="" [formGroup]="formLibs">
+                        <div class="col-sm-12 col-lg-12 flex-lg-row">
+                            <div class="row mb-5">
+                                <div class="col-sm-4 col-lg-4">
+                                    <label>Nombre de la librería</label>
+                                    <input type="text" class="form-control" formControlName="nombre"/>
+                                </div>
+                                <div class="col-sm-4 col-lg-4">
+                                    <label>Autor</label>
+                                    <div ngbDropdown>
+                                        <button type="button" class="btn btn-primary btn-simple btn-round btn-block" id="dropdownBasic3" ngbDropdownToggle>
+                                            {{authorSelected?.nombre || 'Autor'}}
+                                        </button><br>
+                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                            <button *ngFor="let autor of authorsLs" ngbDropdownItem (click)="authorSelected = autor">{{autor.nombre}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-lg-4">
+                                    <label>Descripción</label>
+<!--                                    <textarea  class="form-control" /></textarea>-->
+                                    <textarea class="form-control" formControlName="descripcion"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col-sm-4 col-lg-4">
+                                    <label>Cantidad de loops</label>
+                                    <input type="text" class="form-control" formControlName="cantidadLoops"/>
+                                </div>
+                                <div class="col-sm-4 col-lg-4">
+                                    <label>Precio</label>
+                                    <input type="text" class="form-control" formControlName="precio"/>
+                                </div>
+                            </div>
+
+                            <div class="row mb-5">
+                                <div class="col-sm-4 col-lg-4">
+                                    <input type="file" class="file-input" accept="image/png, image/gif, image/jpeg"
+                                           (change)="handleImageInput($event.target.files)" #fileUpload>
+                                    <label>Imagen</label>
+                                    <div class="file-upload">
+
+                                        {{imageName || "Aun no ha seleccionado una imagen"}}
+
+                                        <button class="btn btn-info btn-round" style="background-color: #f96332"
+                                                (click)="fileUpload.click()">
+                                            <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-lg-4">
+                                    <input type="file" class="file-input" accept="audio/mpeg"
+                                           (change)="handleAudioPrevInput($event.target.files)" #fileUpload2>
+                                    <label>Audio preview</label>
+                                    <div class="file-upload">
+
+                                        {{audioPrevName || "Aun no ha seleccionado un audio"}}
+
+                                        <button class="btn btn-info btn-round" style="background-color: #f96332"
+                                                (click)="fileUpload2.click()">
+                                            <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-lg-4">
+                                    <input type="file" class="file-input" accept=".rar"
+                                           (change)="handleAudioFullInput($event.target.files)" #fileUpload3>
+                                    <label>Archivo de venta (.rar)</label>
+                                    <div class="file-upload">
+
+                                        {{audioFullName || "Aun no ha seleccionado un archivo .rar"}}
+
+                                        <button class="btn btn-info btn-round" style="background-color: #f96332"
+                                                (click)="fileUpload3.click()">
+                                            <i class="fa fa-paperclip" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-round btn-block" (click)="uploadImage()">Agregar librería <i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="libsLs.length>0">
+                    <div class="col-md-4 mb-4"  *ngFor="let lib of libsLs">
+                        <div class="team-player img-raised" style="border-radius: 13px;">
+                            <img [src]="lib.cover" alt="Thumbnail Image" class="img-fluid imgScuared mt-5" style="border-radius: 13px;">
+                            <h4 class="title mr-2 ml-2" style="overflow-wrap: break-word;">{{lib.nombre}}</h4>
+                            <p class="category text-primary ml-2 mr-2" style="overflow-wrap: break-word;">{{lib.autor.nombre}}</p>
+                            <p class="description ml-2 mr-2" style="overflow-wrap: break-word;">{{lib.descripcion}}</p>
+                            <span class="badge badge-info">{{lib.cantidadLoops}} Loops</span>
+                            <p class="category text-primary ml-2 mr-2" style="overflow-wrap: break-word;">${{lib.precio}}</p>
+                            <a *ngIf="audioReproductor.src != lib.audioPreview" class="btn btn-primary btn-icon btn-round" (click)="reproducir(lib.audioPreview, true)"><i class="now-ui-icons media-1_button-play"></i></a>
+                            <a *ngIf="audioReproductor.src == lib.audioPreview" class="btn btn-primary btn-icon btn-round" (click)="reproducir(lib.audioPreview, false)"><i class="now-ui-icons media-1_button-pause"></i></a>
+                            <br>
+                            <button class="btn btn-danger btn-icon btn-round" type="button" (click)="deleteLib(lib)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

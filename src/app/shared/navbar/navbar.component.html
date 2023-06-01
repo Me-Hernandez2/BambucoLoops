@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="500">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand" [routerLink]="['/inicio']" placement="bottom"
+               ngbTooltip="Bienvenido a BambucoLoops!!">
+                BambucoLoops
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+                    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"
+                    (click)="sidebarToggle()">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" data-nav-image="assets/img/blurred-image-1.jpg" data-color="orange">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/inicio']">
+                        <i class="now-ui-icons business_bank"></i>
+                        <p>Inicio</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/librerias']">
+                        <i class="now-ui-icons education_agenda-bookmark"></i>
+                        <p>Librerías</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/loops']">
+                        <i class="now-ui-icons media-2_note-03"></i>
+                        <p>Loops</p>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="isLogged">
+                    <a class="nav-link" [routerLink]="['/biblioteca']">
+                        <i class="now-ui-icons files_box"></i>
+                        <p>Biblioteca</p>
+                    </a>
+                </li>
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link"-->
+<!--                       href="https://creativetimofficial.github.io/now-ui-kit-angular/documentation/tutorial"-->
+<!--                       target="_blank">-->
+<!--                        <i class="now-ui-icons files_paper"></i>-->
+<!--                        <p>Documentation</p>-->
+<!--                    </a>-->
+<!--                </li>-->
+                <li class="nav-item" *ngIf="isLogged && isAdmin">
+                    <div ngbDropdown class="dropdown">
+                        <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+                            <i class="now-ui-icons loader_gear spin"></i>
+                            <p>
+                                Administrar
+                            </p>
+                        </a>
+                        <div ngbDropdownMenu class="dropdown-menu">
+                            <a class="dropdown-item" [routerLink]="['/adminIntrumentos']">Instrumentos</a>
+                            <a class="dropdown-item" [routerLink]="['/adminAutores']">Autores</a>
+                            <a class="dropdown-item" [routerLink]="['/adminLibrerias']">Librerías</a>
+                            <a class="dropdown-item" [routerLink]="['/adminLoops']">Loops</a>
+                            <a class="dropdown-item" [routerLink]="['/adminVentas']">Ventas</a>
+                            <a class="dropdown-item" [routerLink]="['/adminVentasUsuario']">Ventas por autor</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item" *ngIf="isLogged">
+                    <a class="nav-link" title=" Tus BambuCoins!" href="https://twitter.com/CreativeTim" target="_blank">
+                        <i class="now-ui-icons business_money-coins"></i>
+                        {{coins}}
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="isLogged">
+                    <div ngbDropdown class="dropdown">
+                        <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+                            <img src="{{userData?.user.photoURL}}" style="max-width: 30px; border-radius: 100%;">
+                        </a>
+                        <div ngbDropdownMenu class="dropdown-menu" style="cursor: pointer">
+                            <p class="dropdown-item" style="color: #f96332">{{userData?._tokenResponse.fullName}}</p>
+                            <a class="dropdown-item" style="cursor: pointer" [routerLink]="['/recargarCreditos']">Regargar
+                                BambuCoins</a>
+                            <a class="dropdown-item" style="cursor: pointer" (click)="logout()">Cerrar sesion</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item" *ngIf="!isLogged">
+                    <a class="nav-link btn btn-neutral" (click)="login()" target="_blank">
+                        <i class="now-ui-icons arrows-1_share-66"></i>
+                        <p style="margin-left: 5px">Iniciar sesion con Google</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
